@@ -60,7 +60,7 @@ export const TeamMember = ({ name, title, image, linkdin, twitter }) => {
     );
 };
 
-export const BlogCard = ({ title, excerpt, image, author, role, date }) => {
+export const BlogCard = ({ id, title, excerpt, image, author, role, date, onReadMore }) => {
     return (
         <div className="rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700">
             <div className="relative">
@@ -72,14 +72,22 @@ export const BlogCard = ({ title, excerpt, image, author, role, date }) => {
             <div className="p-6">
                 <h3 className="text-xl font-bold mb-3 line-clamp-2 hover:text-blue-600 transition-colors duration-200">{title}</h3>
                 <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3">{excerpt}</p>
-                <div className="flex items-center">
-                    <div className="w-8 h-8 rounded-full overflow-hidden mr-3 bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center text-white">
-                        {author.charAt(0)}
+                <div className="flex items-center justify-between">
+                    <div className="flex items-center">
+                        <div className="w-8 h-8 rounded-full overflow-hidden mr-3 bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center text-white">
+                            {author.charAt(0)}
+                        </div>
+                        <div>
+                            <div className="font-medium">{author}</div>
+                            <div className="text-xs text-gray-600 dark:text-gray-400">{role}</div>
+                        </div>
                     </div>
-                    <div>
-                        <div className="font-medium">{author}</div>
-                        <div className="text-xs text-gray-600 dark:text-gray-400">{role}</div>
-                    </div>
+                    <button
+                        onClick={onReadMore}
+                        className="text-blue-600 hover:text-blue-800 font-medium transition-colors"
+                    >
+                        Read More
+                    </button>
                 </div>
             </div>
         </div>
