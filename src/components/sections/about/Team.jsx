@@ -25,7 +25,7 @@ const Team = ({ darkMode }) => {
                         />
                         <TeamMember
                             name="Ayush Mishra"
-                            title="Chief Technology Officer"
+                            title="CTO"
                             image={cto}
                             linkdin="https://www.linkedin.com/in/ayush-mishra-b8882712b/"
                             twitter="https://www.linkedin.com/in/ayush-mishra-b8882712b/"
