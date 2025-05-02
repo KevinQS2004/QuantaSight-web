@@ -17,19 +17,20 @@ const Team = ({ darkMode }) => {
                 <div className="flex justify-center w-full ">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-36 8max-w-4xl mx-auto">
                         <TeamMember
-                            name="Ayush Mishra"
-                            title="Chief Technology Officer"
-                            image={cto}
-                            linkdin="https://www.linkedin.com/in/ayush-mishra-b8882712b/"
-                            twitter="https://www.linkedin.com/in/ayush-mishra-b8882712b/"
-                        />
-                        <TeamMember
                             name="Dr. Sameer Trikha"
                             title="Founder & CEO"
                             image={founder}
                             linkdin="https://www.linkedin.com/in/sameer-trikha-1b987154/"
                             twitter="https://x.com/SameerTrikha"
                         />
+                        <TeamMember
+                            name="Ayush Mishra"
+                            title="Chief Technology Officer"
+                            image={cto}
+                            linkdin="https://www.linkedin.com/in/ayush-mishra-b8882712b/"
+                            twitter="https://www.linkedin.com/in/ayush-mishra-b8882712b/"
+                        />
+
                         <TeamMember
                             name="Bhargav"
                             title="AI Expert"
