@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
     Sun, Moon, Menu, X, ChevronDown, Brain,
     Home, Info, FileText, Phone, LogIn
@@ -16,22 +16,49 @@ const Header = ({ activeSection, setActiveSection }) => {
         modules: false
     });
 
+    // Create refs for each dropdown
+    const featuresRef = useRef(null);
+    const modulesRef = useRef(null);
+
     const toggleMobileMenu = () => {
         setMobileMenuOpen(!mobileMenuOpen);
     };
 
     const toggleDropdown = (menu) => {
+        // Close other dropdowns when opening a new one
         setDropdownOpen({
-            ...dropdownOpen,
-            [menu]: !dropdownOpen[menu]
+            features: menu === 'features' ? !dropdownOpen.features : false,
+            modules: menu === 'modules' ? !dropdownOpen.modules : false
         });
     };
+
+    // Handle clicks outside the dropdown
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            // Close features dropdown if click outside
+            if (featuresRef.current && !featuresRef.current.contains(event.target)) {
+                setDropdownOpen(prev => ({...prev, features: false}));
+            }
+
+            // Close modules dropdown if click outside
+            if (modulesRef.current && !modulesRef.current.contains(event.target)) {
+                setDropdownOpen(prev => ({...prev, modules: false}));
+            }
+        };
+
+        // Add event listener
+        document.addEventListener('mousedown', handleClickOutside);
+
+        // Clean up
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
 
     return (
         <header className={`sticky top-0 z-50 ${darkMode ? 'bg-gray-800' : 'bg-white'} shadow-md`}>
             <div className="container mx-auto px-4">
                 <div className="flex justify-between items-center py-4">
-                    {/* Logo */}
                     {/* Logo */}
                     <div className="flex items-center space-x-2">
                         <span className="h-10 w-10 flex items-center">
@@ -59,7 +86,7 @@ const Header = ({ activeSection, setActiveSection }) => {
                         />
 
                         {/* Features Dropdown */}
-                        <div className="relative">
+                        <div className="relative" ref={featuresRef}>
                             <button
                                 className={`flex items-center space-x-1 px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors ${activeSection === 'features' ? 'text-blue-600' : ''}`}
                                 onClick={() => toggleDropdown('features')}
@@ -69,32 +96,43 @@ const Header = ({ activeSection, setActiveSection }) => {
                             </button>
 
                             {dropdownOpen.features && (
-                                <div className={`absolute left-0 mt-2 w-60 ${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-md shadow-lg z-10`}>
+                                <div className={`absolute left-0 mt-2 w-60 ${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-md shadow-lg z-10 border ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
                                     <div className="py-2">
                                         <DropdownItem
                                             title="XtractXtract"
                                             description="AI-powered research & analysis"
-                                            onClick={() => setActiveSection('xtract')}
+                                            onClick={() => {
+                                                setActiveSection('xtract');
+                                                setDropdownOpen({...dropdownOpen, features: false});
+                                            }}
                                         />
                                         <DropdownItem
                                             title="Medical Affairs Intelligence"
                                             description="Unifying data from multiple sources"
-                                            onClick={() => {}}
+                                            onClick={() => {
+                                                setDropdownOpen({...dropdownOpen, features: false});
+                                            }}
                                         />
                                         <DropdownItem
                                             title="Pharmacovigilance Atlas"
                                             description="AI-driven signal monitoring"
-                                            onClick={() => {}}
+                                            onClick={() => {
+                                                setDropdownOpen({...dropdownOpen, features: false});
+                                            }}
                                         />
                                         <DropdownItem
                                             title="QS Workroom"
                                             description="Collaboration & content generation"
-                                            onClick={() => {}}
+                                            onClick={() => {
+                                                setDropdownOpen({...dropdownOpen, features: false});
+                                            }}
                                         />
                                         <DropdownItem
                                             title="AI CRM TL Dashboard"
                                             description="Manage clients with AI assistance"
-                                            onClick={() => {}}
+                                            onClick={() => {
+                                                setDropdownOpen({...dropdownOpen, features: false});
+                                            }}
                                         />
                                     </div>
                                 </div>
@@ -102,7 +140,7 @@ const Header = ({ activeSection, setActiveSection }) => {
                         </div>
 
                         {/* Modules Dropdown */}
-                        <div className="relative">
+                        <div className="relative" ref={modulesRef}>
                             <button
                                 className={`flex items-center space-x-1 px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors ${activeSection === 'modules' ? 'text-blue-600' : ''}`}
                                 onClick={() => toggleDropdown('modules')}
@@ -112,22 +150,31 @@ const Header = ({ activeSection, setActiveSection }) => {
                             </button>
 
                             {dropdownOpen.modules && (
-                                <div className={`absolute left-0 mt-2 w-60 ${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-md shadow-lg z-10`}>
+                                <div className={`absolute left-0 mt-2 w-60 ${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-md shadow-lg z-10 border ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
                                     <div className="py-2">
                                         <DropdownItem
                                             title="Xtract"
                                             description="Scientific research & AI summarization"
-                                            onClick={() => setActiveSection('xtract')}
+                                            onClick={() => {
+                                                setActiveSection('xtract');
+                                                setDropdownOpen({...dropdownOpen, modules: false});
+                                            }}
                                         />
                                         <DropdownItem
                                             title="Atlas"
                                             description="Agentic AI query monitoring"
-                                            onClick={() => setActiveSection('atlas')}
+                                            onClick={() => {
+                                                setActiveSection('atlas');
+                                                setDropdownOpen({...dropdownOpen, modules: false});
+                                            }}
                                         />
                                         <DropdownItem
                                             title="Workroom"
                                             description="Team collaboration & content sharing"
-                                            onClick={() => setActiveSection('workroom')}
+                                            onClick={() => {
+                                                setActiveSection('workroom');
+                                                setDropdownOpen({...dropdownOpen, modules: false});
+                                            }}
                                         />
                                     </div>
                                 </div>
@@ -205,23 +252,23 @@ const Header = ({ activeSection, setActiveSection }) => {
                                 <div className="pl-6 mt-2 space-y-2">
                                     <MobileNavLink
                                         title="XtractXtract"
-                                        onClick={() => {setActiveSection('xtract'); setMobileMenuOpen(false);}}
+                                        onClick={() => {setActiveSection('xtract'); setMobileMenuOpen(false); setDropdownOpen({...dropdownOpen, features: false});}}
                                     />
                                     <MobileNavLink
                                         title="Medical Affairs Intelligence"
-                                        onClick={() => {setMobileMenuOpen(false);}}
+                                        onClick={() => {setMobileMenuOpen(false); setDropdownOpen({...dropdownOpen, features: false});}}
                                     />
                                     <MobileNavLink
                                         title="Pharmacovigilance Atlas"
-                                        onClick={() => {setMobileMenuOpen(false);}}
+                                        onClick={() => {setMobileMenuOpen(false); setDropdownOpen({...dropdownOpen, features: false});}}
                                     />
                                     <MobileNavLink
                                         title="QS Workroom"
-                                        onClick={() => {setMobileMenuOpen(false);}}
+                                        onClick={() => {setMobileMenuOpen(false); setDropdownOpen({...dropdownOpen, features: false});}}
                                     />
                                     <MobileNavLink
                                         title="AI CRM TL Dashboard"
-                                        onClick={() => {setMobileMenuOpen(false);}}
+                                        onClick={() => {setMobileMenuOpen(false); setDropdownOpen({...dropdownOpen, features: false});}}
                                     />
                                 </div>
                             )}
@@ -241,15 +288,15 @@ const Header = ({ activeSection, setActiveSection }) => {
                                 <div className="pl-6 mt-2 space-y-2">
                                     <MobileNavLink
                                         title="Xtract"
-                                        onClick={() => {setActiveSection('xtract'); setMobileMenuOpen(false);}}
+                                        onClick={() => {setActiveSection('xtract'); setMobileMenuOpen(false); setDropdownOpen({...dropdownOpen, modules: false});}}
                                     />
                                     <MobileNavLink
                                         title="Atlas"
-                                        onClick={() => {setActiveSection('atlas'); setMobileMenuOpen(false);}}
+                                        onClick={() => {setActiveSection('atlas'); setMobileMenuOpen(false); setDropdownOpen({...dropdownOpen, modules: false});}}
                                     />
                                     <MobileNavLink
                                         title="Workroom"
-                                        onClick={() => {setActiveSection('workroom'); setMobileMenuOpen(false);}}
+                                        onClick={() => {setActiveSection('workroom'); setMobileMenuOpen(false); setDropdownOpen({...dropdownOpen, modules: false});}}
                                     />
                                 </div>
                             )}

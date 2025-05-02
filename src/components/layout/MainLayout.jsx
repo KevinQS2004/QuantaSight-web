@@ -7,14 +7,19 @@ import useScrollAnimation from '../../hooks/useScrollAnimation';
 const MainLayout = ({ children, activeSection, setActiveSection }) => {
     const { darkMode } = useTheme();
     useScrollAnimation();
+
     return (
-        <div className={`font-sans min-h-screen ${darkMode ? 'dark bg-gray-900 text-white' : 'bg-white text-gray-900'}`}>
+        <div className={`font-sans min-h-screen ${
+            darkMode
+                ? 'dark bg-gray-900 text-white'
+                : 'bg-gray-50 text-gray-800'
+        }`}>
             <Header
                 activeSection={activeSection}
                 setActiveSection={setActiveSection}
             />
 
-            <main>
+            <main className={darkMode ? '' : 'text-gray-800'}>
                 {children}
             </main>
 
