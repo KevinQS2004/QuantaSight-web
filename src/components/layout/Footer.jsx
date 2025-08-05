@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useTheme } from '../../context/ThemeContext';
 import logo from "../../assets/images/qs_logo_small.png";
 import qs_name_nobg from "../../assets/images/qs_name_nobg.png";
@@ -21,14 +22,14 @@ const FooterLinkGroup = ({ title, children }) => {
     );
 };
 
-// Improved Footer Link Component
-const FooterLink = ({ title, onClick }) => {
+// Updated Footer Link Component with React Router
+const FooterLink = ({ title, to }) => {
     const { darkMode } = useTheme();
 
     return (
         <li>
-            <button
-                onClick={onClick}
+            <Link
+                to={to}
                 className={`text-sm transition-colors hover:underline ${
                     darkMode
                         ? 'text-gray-400 hover:text-blue-300'
@@ -36,12 +37,12 @@ const FooterLink = ({ title, onClick }) => {
                 }`}
             >
                 {title}
-            </button>
+            </Link>
         </li>
     );
 };
 
-const Footer = ({ setActiveSection }) => {
+const Footer = () => {
     const { darkMode } = useTheme();
 
     return (
@@ -53,14 +54,14 @@ const Footer = ({ setActiveSection }) => {
             <div className="container mx-auto px-4">
                 <div className="flex flex-col md:flex-row justify-between items-center">
                     <div className="mb-6 md:mb-0">
-                        <div className="flex items-center space-x-2">
+                        <Link to="/" className="flex items-center space-x-2">
                             <span className="h-10 w-10 flex items-center">
                                 <img src={logo} alt="Logo" className="h-full w-auto object-contain"/>
                             </span>
                             <span className="h-8 flex items-center">
                                 <img src={qs_name_nobg} alt="QuantaSight" className="h-full w-auto object-contain"/>
                             </span>
-                        </div>
+                        </Link>
                         <p className={`mt-2 text-sm ${
                             darkMode ? 'text-gray-400' : 'text-gray-600'
                         }`}>
@@ -71,26 +72,26 @@ const Footer = ({ setActiveSection }) => {
 
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                         <FooterLinkGroup title="Company">
-                            <FooterLink title="About Us" onClick={() => setActiveSection('about')}/>
-                            <FooterLink title="Careers" onClick={() => {}}/>
-                            <FooterLink title="Contact" onClick={() => {}}/>
-                            <FooterLink title="ISO Certification" onClick={() => {}}/>
+                            <FooterLink title="About Us" to="/about"/>
+                            <FooterLink title="Careers" to="/about"/>
+                            <FooterLink title="Contact" to="/demo"/>
+                            <FooterLink title="ISO Certification" to="/about"/>
                         </FooterLinkGroup>
 
                         <FooterLinkGroup title="Products">
-                            <FooterLink title="Xtract" onClick={() => setActiveSection('xtract')}/>
-                            <FooterLink title="Atlas" onClick={() => setActiveSection('atlas')}/>
-                            <FooterLink title="Workroom" onClick={() => setActiveSection('workroom')}/>
-                            <FooterLink title="CRM Dashboard" onClick={() => {}}/>
+                            <FooterLink title="Xtract" to="/xtract"/>
+                            <FooterLink title="Atlas" to="/atlas"/>
+                            <FooterLink title="Workroom" to="/workroom"/>
+                            <FooterLink title="CRM Dashboard" to="/demo"/>
                         </FooterLinkGroup>
 
                         <FooterLinkGroup title="Resources">
-                            <FooterLink title="Blog" onClick={() => setActiveSection('blogs')}/>
-                            <FooterLink title="Case Studies" onClick={() => {}}/>
+                            <FooterLink title="Blog" to="/blogs"/>
+                            <FooterLink title="Case Studies" to="/blogs"/>
                         </FooterLinkGroup>
 
                         <FooterLinkGroup title="Legal">
-                            <FooterLink title="Privacy Policy" onClick={() => {}}/>
+                            <FooterLink title="Privacy Policy" to="/about"/>
                         </FooterLinkGroup>
                     </div>
                 </div>

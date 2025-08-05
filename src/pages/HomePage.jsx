@@ -6,15 +6,15 @@ import ModulesOverview from '../components/sections/home/ModulesOverview';
 import CTASection from '../components/sections/home/CTASection';
 import Testimonials from '../components/sections/home/Testimonials';
 
-const HomePage = ({ setActiveSection }) => {
+const HomePage = () => {
     const { darkMode } = useTheme();
 
     return (
         <div>
-            <Hero darkMode={darkMode} setActiveSection={setActiveSection} />
+            <Hero darkMode={darkMode} />
             <Features darkMode={darkMode} />
-            <ModulesOverview darkMode={darkMode} setActiveSection={setActiveSection} />
-            <CTASection darkMode={darkMode} setActiveSection={setActiveSection} />
+            <ModulesOverview darkMode={darkMode} />
+            <CTASection darkMode={darkMode} />
             <Testimonials darkMode={darkMode} />
         </div>
     );

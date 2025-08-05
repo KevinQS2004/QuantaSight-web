@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
 import MainLayout from './components/layout/MainLayout';
 import HomePage from './pages/HomePage';
@@ -13,40 +14,24 @@ import './styles/globals.css';
 import './styles/animations.css';
 
 const App = () => {
-    const [activeSection, setActiveSection] = useState('home');
-
-    // Render the appropriate page based on activeSection
-    const renderActivePage = () => {
-        switch (activeSection) {
-            case 'home':
-                return <HomePage setActiveSection={setActiveSection} />;
-            case 'about':
-                return <AboutPage />;
-            case 'xtract':
-                return <XtractPage />;
-            case 'atlas':
-                return <AtlasPage />;
-            case 'workroom':
-                return <WorkroomPage />;
-            case 'blogs':
-                return <BlogsPage />;
-            case 'demo':
-                return <DemoPage />;
-            case 'login':
-                return <LoginPage />;
-            default:
-                return <HomePage setActiveSection={setActiveSection} />;
-        }
-    };
-
     return (
         <ThemeProvider>
-            <MainLayout
-                activeSection={activeSection}
-                setActiveSection={setActiveSection}
-            >
-                {renderActivePage()}
-            </MainLayout>
+            <Router>
+                <MainLayout>
+                    <Routes>
+                        <Route path="/" element={<HomePage />} />
+                        <Route path="/about" element={<AboutPage />} />
+                        <Route path="/xtract" element={<XtractPage />} />
+                        <Route path="/atlas" element={<AtlasPage />} />
+                        <Route path="/workroom" element={<WorkroomPage />} />
+                        <Route path="/blogs" element={<BlogsPage />} />
+                        <Route path="/demo" element={<DemoPage />} />
+                        <Route path="/login" element={<LoginPage />} />
+                        {/* Catch all route - redirect to home */}
+                        <Route path="*" element={<HomePage />} />
+                    </Routes>
+                </MainLayout>
+            </Router>
         </ThemeProvider>
     );
 };

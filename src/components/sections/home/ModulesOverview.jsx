@@ -1,14 +1,15 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { FileText, Database, Users } from 'lucide-react';
-import {useTheme} from "../../../context/ThemeContext.jsx";
+import { useTheme } from '../../../context/ThemeContext';
 
-// Improved ModuleCard component with better light mode styling
-const ModuleCard = ({ title, description, icon, onClick }) => {
+// Updated ModuleCard component with React Router navigation
+const ModuleCard = ({ title, description, icon, to }) => {
     const { darkMode } = useTheme();
 
     return (
-        <div
-            onClick={onClick}
+        <Link
+            to={to}
             className={`p-8 rounded-xl shadow-lg transition-all duration-300 cursor-pointer hover:shadow-xl transform hover:-translate-y-1 flex flex-col items-center text-center ${
                 darkMode
                     ? 'bg-gray-800 text-white'
@@ -35,11 +36,11 @@ const ModuleCard = ({ title, description, icon, onClick }) => {
             >
                 Learn More <span className="ml-1">→</span>
             </button>
-        </div>
+        </Link>
     );
 };
 
-const ModulesOverview = ({ darkMode, setActiveSection }) => {
+const ModulesOverview = ({ darkMode }) => {
     return (
         <section className={`py-16 ${darkMode ? 'bg-gray-800' : 'bg-gray-50'}`}>
             <div className="container mx-auto px-4">
@@ -61,21 +62,21 @@ const ModulesOverview = ({ darkMode, setActiveSection }) => {
                         title="Xtract"
                         description="Scientific Information, Guidelines, Patents, Clinical Trials. Include AI summarisation and evaluation."
                         icon={<FileText />}
-                        onClick={() => setActiveSection('xtract')}
+                        to="/xtract"
                     />
 
                     <ModuleCard
                         title="Atlas"
                         description="Agentic AI to monitor for signals as part of post market surveillance with automatic query capabilities."
                         icon={<Database />}
-                        onClick={() => setActiveSection('atlas')}
+                        to="/atlas"
                     />
 
                     <ModuleCard
                         title="Workroom"
                         description="Area to share and collaborate. Drag and Drop summaries to rapidly create content in multiple formats."
                         icon={<Users />}
-                        onClick={() => setActiveSection('workroom')}
+                        to="/workroom"
                     />
                 </div>
             </div>

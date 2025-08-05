@@ -1,8 +1,51 @@
 import React from 'react';
-import { PrimaryButton, SecondaryButton } from '../../common/Button';
+import { Link } from 'react-router-dom';
+import { useTheme } from '../../../context/ThemeContext';
 import logoImage from "../../../assets/images/img.png";
 
-const Hero = ({ darkMode, setActiveSection }) => {
+// Updated PrimaryButton component with Link
+const PrimaryButton = ({ to, children, onClick, fullWidth = false }) => {
+    const baseClasses = `px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium ${
+        fullWidth ? 'w-full' : ''
+    }`;
+
+    if (to) {
+        return (
+            <Link to={to} className={baseClasses}>
+                {children}
+            </Link>
+        );
+    }
+
+    return (
+        <button onClick={onClick} className={baseClasses}>
+            {children}
+        </button>
+    );
+};
+
+// Updated SecondaryButton component with Link
+const SecondaryButton = ({ to, children, onClick, darkMode, fullWidth = false }) => {
+    const baseClasses = `px-6 py-3 rounded-lg font-medium ${
+        darkMode ? 'bg-gray-800 text-white hover:bg-gray-700' : 'bg-white text-gray-900 hover:bg-gray-100'
+    } transition-colors ${fullWidth ? 'w-full' : ''}`;
+
+    if (to) {
+        return (
+            <Link to={to} className={baseClasses}>
+                {children}
+            </Link>
+        );
+    }
+
+    return (
+        <button onClick={onClick} className={baseClasses}>
+            {children}
+        </button>
+    );
+};
+
+const Hero = ({ darkMode }) => {
     return (
         <section className={`py-16 md:py-24 ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
             <div className="container mx-auto px-4">
@@ -20,10 +63,10 @@ const Hero = ({ darkMode, setActiveSection }) => {
                             Imagine a world where content assimilation and generation takes minutes, rather than weeks...
                         </p>
                         <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                            <PrimaryButton onClick={() => setActiveSection('demo')}>
+                            <PrimaryButton to="/demo">
                                 Request a Demo
                             </PrimaryButton>
-                            <SecondaryButton onClick={() => setActiveSection('about')} darkMode={darkMode}>
+                            <SecondaryButton to="/about" darkMode={darkMode}>
                                 Learn More
                             </SecondaryButton>
                         </div>

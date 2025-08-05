@@ -1,8 +1,29 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { BriefcaseMedical } from 'lucide-react';
-import { PrimaryButton } from '../../common/Button';
 
-const CTASection = ({ darkMode, setActiveSection }) => {
+// Updated PrimaryButton component with Link support
+const PrimaryButton = ({ to, children, onClick, fullWidth = false }) => {
+    const baseClasses = `px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium ${
+        fullWidth ? 'w-full' : ''
+    }`;
+
+    if (to) {
+        return (
+            <Link to={to} className={baseClasses}>
+                {children}
+            </Link>
+        );
+    }
+
+    return (
+        <button onClick={onClick} className={baseClasses}>
+            {children}
+        </button>
+    );
+};
+
+const CTASection = ({ darkMode }) => {
     return (
         <section className="py-16">
             <div className="container mx-auto px-4">
@@ -14,7 +35,7 @@ const CTASection = ({ darkMode, setActiveSection }) => {
                                 <p className="text-lg text-gray-600 dark:text-gray-400 mb-6">
                                     Schedule a demo today to see the QuantaSight platform in action and discover how our AI solutions can supercharge your team's productivity.
                                 </p>
-                                <PrimaryButton onClick={() => setActiveSection('demo')}>
+                                <PrimaryButton to="/demo">
                                     Request a Demo
                                 </PrimaryButton>
                             </div>

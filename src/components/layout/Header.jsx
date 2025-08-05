@@ -1,14 +1,60 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import {
     Sun, Moon, Menu, X, ChevronDown, Brain,
     Home, Info, FileText, Phone, LogIn
 } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
-import { NavLink, MobileNavLink, DropdownItem } from '../common/Navigation';
 import logo from '../../assets/images/qs_logo_small.png';
 import qs_name_nobg from '../../assets/images/qs_name_nobg.png';
 
-const Header = ({ activeSection, setActiveSection }) => {
+// Updated NavLink component to use React Router
+const NavLink = ({ title, icon, to, isButton }) => {
+    const location = useLocation();
+    const isActive = location.pathname === to || (to === '/' && location.pathname === '/');
+
+    return (
+        <Link
+            to={to}
+            className={`
+                flex items-center space-x-1 px-3 py-2 rounded-md transition-colors
+                ${isButton ? 'bg-blue-600 hover:bg-blue-700 text-white' : isActive ? 'text-blue-600' : 'hover:bg-gray-100 dark:hover:bg-gray-700'}
+            `}
+        >
+            {icon}
+            <span>{title}</span>
+        </Link>
+    );
+};
+
+// Updated MobileNavLink component
+const MobileNavLink = ({ title, icon, to, isButton, onClick }) => (
+    <Link
+        to={to}
+        onClick={onClick}
+        className={`
+            flex items-center space-x-2 px-4 py-2 rounded-md transition-colors w-full
+            ${isButton ? 'bg-blue-600 hover:bg-blue-700 text-white' : 'hover:bg-gray-100 dark:hover:bg-gray-700'}
+        `}
+    >
+        {icon && icon}
+        <span>{title}</span>
+    </Link>
+);
+
+// Updated DropdownItem component
+const DropdownItem = ({ title, description, to, onClick }) => (
+    <Link
+        to={to}
+        onClick={onClick}
+        className="w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors block"
+    >
+        <div className="font-medium">{title}</div>
+        <div className="text-sm text-gray-500 dark:text-gray-400">{description}</div>
+    </Link>
+);
+
+const Header = ({ activeSection }) => {
     const { darkMode, toggleDarkMode } = useTheme();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState({
@@ -30,6 +76,15 @@ const Header = ({ activeSection, setActiveSection }) => {
             features: menu === 'features' ? !dropdownOpen.features : false,
             modules: menu === 'modules' ? !dropdownOpen.modules : false
         });
+    };
+
+    const closeDropdowns = () => {
+        setDropdownOpen({ features: false, modules: false });
+    };
+
+    const closeMobileMenu = () => {
+        setMobileMenuOpen(false);
+        closeDropdowns();
     };
 
     // Handle clicks outside the dropdown
@@ -60,29 +115,26 @@ const Header = ({ activeSection, setActiveSection }) => {
             <div className="container mx-auto px-4">
                 <div className="flex justify-between items-center py-4">
                     {/* Logo */}
-                    <div className="flex items-center space-x-2">
+                    <Link to="/" className="flex items-center space-x-2">
                         <span className="h-10 w-10 flex items-center">
                             <img src={logo} alt="Logo" className="h-full w-auto object-contain" />
                         </span>
-
                         <span className="h-8 flex items-center">
                             <img src={qs_name_nobg} alt="QuantaSight" className="h-full w-auto object-contain" />
                         </span>
-                    </div>
+                    </Link>
 
                     {/* Desktop Navigation */}
                     <nav className="hidden md:flex items-center space-x-6">
                         <NavLink
                             title="Home"
                             icon={<Home size={16} />}
-                            active={activeSection === 'home'}
-                            onClick={() => setActiveSection('home')}
+                            to="/"
                         />
                         <NavLink
                             title="About"
                             icon={<Info size={16} />}
-                            active={activeSection === 'about'}
-                            onClick={() => setActiveSection('about')}
+                            to="/about"
                         />
 
                         {/* Features Dropdown */}
@@ -101,38 +153,32 @@ const Header = ({ activeSection, setActiveSection }) => {
                                         <DropdownItem
                                             title="Xtract"
                                             description="AI-powered research & analysis"
-                                            onClick={() => {
-                                                setActiveSection('xtract');
-                                                setDropdownOpen({...dropdownOpen, features: false});
-                                            }}
+                                            to="/xtract"
+                                            onClick={closeDropdowns}
                                         />
                                         <DropdownItem
                                             title="Medical Affairs Intelligence"
                                             description="Unifying data from multiple sources"
-                                            onClick={() => {
-                                                setDropdownOpen({...dropdownOpen, features: false});
-                                            }}
+                                            to="/xtract"
+                                            onClick={closeDropdowns}
                                         />
                                         <DropdownItem
                                             title="Pharmacovigilance Atlas"
                                             description="AI-driven signal monitoring"
-                                            onClick={() => {
-                                                setDropdownOpen({...dropdownOpen, features: false});
-                                            }}
+                                            to="/atlas"
+                                            onClick={closeDropdowns}
                                         />
                                         <DropdownItem
                                             title="QS Workroom"
                                             description="Collaboration & content generation"
-                                            onClick={() => {
-                                                setDropdownOpen({...dropdownOpen, features: false});
-                                            }}
+                                            to="/workroom"
+                                            onClick={closeDropdowns}
                                         />
                                         <DropdownItem
                                             title="AI CRM Dashboard"
                                             description="Manage clients, clinical trials and deployments using AI"
-                                            onClick={() => {
-                                                setDropdownOpen({...dropdownOpen, features: false});
-                                            }}
+                                            to="/demo"
+                                            onClick={closeDropdowns}
                                         />
                                     </div>
                                 </div>
@@ -155,26 +201,20 @@ const Header = ({ activeSection, setActiveSection }) => {
                                         <DropdownItem
                                             title="Xtract"
                                             description="Scientific research & AI summarization"
-                                            onClick={() => {
-                                                setActiveSection('xtract');
-                                                setDropdownOpen({...dropdownOpen, modules: false});
-                                            }}
+                                            to="/xtract"
+                                            onClick={closeDropdowns}
                                         />
                                         <DropdownItem
                                             title="Atlas"
                                             description="Agentic AI query monitoring"
-                                            onClick={() => {
-                                                setActiveSection('atlas');
-                                                setDropdownOpen({...dropdownOpen, modules: false});
-                                            }}
+                                            to="/atlas"
+                                            onClick={closeDropdowns}
                                         />
                                         <DropdownItem
                                             title="Workroom"
                                             description="Team collaboration & content sharing"
-                                            onClick={() => {
-                                                setActiveSection('workroom');
-                                                setDropdownOpen({...dropdownOpen, modules: false});
-                                            }}
+                                            to="/workroom"
+                                            onClick={closeDropdowns}
                                         />
                                     </div>
                                 </div>
@@ -184,21 +224,18 @@ const Header = ({ activeSection, setActiveSection }) => {
                         <NavLink
                             title="Blogs"
                             icon={<FileText size={16} />}
-                            active={activeSection === 'blogs'}
-                            onClick={() => setActiveSection('blogs')}
+                            to="/blogs"
                         />
                         <NavLink
                             title="Request Demo"
                             icon={<Phone size={16} />}
-                            active={activeSection === 'demo'}
-                            onClick={() => setActiveSection('demo')}
+                            to="/demo"
                             isButton={true}
                         />
                         <NavLink
                             title="Login"
                             icon={<LogIn size={16} />}
-                            active={activeSection === 'login'}
-                            onClick={() => setActiveSection('login')}
+                            to="/login"
                         />
                     </nav>
 
@@ -230,12 +267,14 @@ const Header = ({ activeSection, setActiveSection }) => {
                         <MobileNavLink
                             title="Home"
                             icon={<Home size={18} />}
-                            onClick={() => {setActiveSection('home'); setMobileMenuOpen(false);}}
+                            to="/"
+                            onClick={closeMobileMenu}
                         />
                         <MobileNavLink
                             title="About"
                             icon={<Info size={18} />}
-                            onClick={() => {setActiveSection('about'); setMobileMenuOpen(false);}}
+                            to="/about"
+                            onClick={closeMobileMenu}
                         />
 
                         {/* Mobile Features Dropdown */}
@@ -251,24 +290,29 @@ const Header = ({ activeSection, setActiveSection }) => {
                             {dropdownOpen.features && (
                                 <div className="pl-6 mt-2 space-y-2">
                                     <MobileNavLink
-                                        title="XtractXtract"
-                                        onClick={() => {setActiveSection('xtract'); setMobileMenuOpen(false); setDropdownOpen({...dropdownOpen, features: false});}}
+                                        title="Xtract"
+                                        to="/xtract"
+                                        onClick={closeMobileMenu}
                                     />
                                     <MobileNavLink
                                         title="Medical Affairs Intelligence"
-                                        onClick={() => {setMobileMenuOpen(false); setDropdownOpen({...dropdownOpen, features: false});}}
+                                        to="/xtract"
+                                        onClick={closeMobileMenu}
                                     />
                                     <MobileNavLink
                                         title="Pharmacovigilance Atlas"
-                                        onClick={() => {setMobileMenuOpen(false); setDropdownOpen({...dropdownOpen, features: false});}}
+                                        to="/atlas"
+                                        onClick={closeMobileMenu}
                                     />
                                     <MobileNavLink
                                         title="QS Workroom"
-                                        onClick={() => {setMobileMenuOpen(false); setDropdownOpen({...dropdownOpen, features: false});}}
+                                        to="/workroom"
+                                        onClick={closeMobileMenu}
                                     />
                                     <MobileNavLink
-                                        title="AI CRM TL Dashboard"
-                                        onClick={() => {setMobileMenuOpen(false); setDropdownOpen({...dropdownOpen, features: false});}}
+                                        title="AI CRM Dashboard"
+                                        to="/demo"
+                                        onClick={closeMobileMenu}
                                     />
                                 </div>
                             )}
@@ -288,15 +332,18 @@ const Header = ({ activeSection, setActiveSection }) => {
                                 <div className="pl-6 mt-2 space-y-2">
                                     <MobileNavLink
                                         title="Xtract"
-                                        onClick={() => {setActiveSection('xtract'); setMobileMenuOpen(false); setDropdownOpen({...dropdownOpen, modules: false});}}
+                                        to="/xtract"
+                                        onClick={closeMobileMenu}
                                     />
                                     <MobileNavLink
                                         title="Atlas"
-                                        onClick={() => {setActiveSection('atlas'); setMobileMenuOpen(false); setDropdownOpen({...dropdownOpen, modules: false});}}
+                                        to="/atlas"
+                                        onClick={closeMobileMenu}
                                     />
                                     <MobileNavLink
                                         title="Workroom"
-                                        onClick={() => {setActiveSection('workroom'); setMobileMenuOpen(false); setDropdownOpen({...dropdownOpen, modules: false});}}
+                                        to="/workroom"
+                                        onClick={closeMobileMenu}
                                     />
                                 </div>
                             )}
@@ -305,18 +352,21 @@ const Header = ({ activeSection, setActiveSection }) => {
                         <MobileNavLink
                             title="Blogs"
                             icon={<FileText size={18} />}
-                            onClick={() => {setActiveSection('blogs'); setMobileMenuOpen(false);}}
+                            to="/blogs"
+                            onClick={closeMobileMenu}
                         />
                         <MobileNavLink
                             title="Request Demo"
                             icon={<Phone size={18} />}
-                            onClick={() => {setActiveSection('demo'); setMobileMenuOpen(false);}}
+                            to="/demo"
+                            onClick={closeMobileMenu}
                             isButton={true}
                         />
                         <MobileNavLink
                             title="Login"
                             icon={<LogIn size={18} />}
-                            onClick={() => {setActiveSection('login'); setMobileMenuOpen(false);}}
+                            to="/login"
+                            onClick={closeMobileMenu}
                         />
                     </nav>
                 </div>
