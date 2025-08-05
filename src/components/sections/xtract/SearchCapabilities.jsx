@@ -1,44 +1,204 @@
 import React from 'react';
+import { Search, Filter, Calendar, Quote, User, ChevronRight } from 'lucide-react';
 
 const SearchCapabilities = ({ darkMode }) => {
     return (
-        <section className={`py-16 ${darkMode ? 'bg-gray-800' : 'bg-gray-50'}`}>
+        <section className={`py-20 ${darkMode ? 'bg-gray-900' : 'bg-gradient-to-b from-white to-gray-50/50'}`}>
             <div className="container mx-auto px-4">
-                <div className="flex flex-col md:flex-row items-center">
-                    <div className="md:w-1/2 mb-8 md:mb-0">
-                        <h2 className="text-3xl font-bold mb-4">Advanced Search Capabilities</h2>
-                        <p className="text-lg mb-6">
-                            Our powerful search engine allows you to find exactly what you need with precision and speed. Use complex Boolean operators, year-based filtering, and exact matching to narrow down results from millions of documents.
-                        </p>
-                        <div className="space-y-4">
-                            <div className="flex items-center space-x-2">
-                                <div className="w-3 h-3 rounded-full bg-blue-600"></div>
-                                <span>Boolean operators (AND, OR, NOT) for precise queries</span>
+                {/* Section Header */}
+                <div className="text-center mb-16">
+                    <div className={`inline-flex items-center px-3 py-1 glass-light rounded-full text-xs font-medium text-blue-700 mb-4 shadow-lg ${
+                        darkMode ? 'shadow-gray-800/30' : 'shadow-blue-100/50'
+                    }`}>
+                        <Search className="w-3 h-3 mr-2" />
+                        Advanced Search
+                    </div>
+                    <h2 className={`text-2xl font-bold mb-3 ${
+                        darkMode ? 'text-white' : 'text-gray-800'
+                    }`}>
+                        Precision search with powerful operators
+                    </h2>
+                    <p className={`text-base max-w-2xl mx-auto ${
+                        darkMode ? 'text-gray-400' : 'text-gray-600'
+                    }`}>
+                        Find exactly what you need with advanced Boolean operators, filtering, and field-specific searches across millions of documents
+                    </p>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    {/* Left side - Features */}
+                    <div className="space-y-6">
+                        {/* Boolean Operators Card */}
+                        <div className={`professional-card p-6 transition-all duration-300 shadow-xl hover:shadow-2xl hover:-translate-y-1 ${
+                            darkMode
+                                ? 'glass-dark shadow-gray-900/25 hover:shadow-gray-900/40'
+                                : 'glass-card shadow-blue-100/60 hover:shadow-blue-200/70'
+                        }`} style={{
+                            boxShadow: darkMode
+                                ? '0 12px 28px -8px rgba(0, 0, 0, 0.3), 0 8px 24px -12px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+                                : '0 12px 28px -8px rgba(59, 130, 246, 0.18), 0 8px 24px -12px rgba(59, 130, 246, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.7)'
+                        }}>
+                            <div className="flex items-center mb-4">
+                                <div className={`p-3 rounded-xl shadow-lg transition-all duration-300 ${
+                                    darkMode ? 'bg-blue-500/20 shadow-blue-500/20' : 'bg-blue-50 shadow-blue-200/30'
+                                }`}>
+                                    <Filter className={`w-5 h-5 ${darkMode ? 'text-blue-400' : 'text-blue-600'}`} />
+                                </div>
+                                <h3 className="text-base font-bold ml-3">Boolean Operators</h3>
                             </div>
-                            <div className="flex items-center space-x-2">
-                                <div className="w-3 h-3 rounded-full bg-blue-600"></div>
-                                <span>Year and date range filtering</span>
+                            <ul className="space-y-3">
+                                <li className="flex items-start">
+                                    <ChevronRight size={16} className="text-blue-600 mt-1 mr-3 flex-shrink-0 drop-shadow-sm" />
+                                    <span className="text-sm leading-relaxed">AND, OR, NOT operators for precise queries</span>
+                                </li>
+                                <li className="flex items-start">
+                                    <ChevronRight size={16} className="text-blue-600 mt-1 mr-3 flex-shrink-0 drop-shadow-sm" />
+                                    <span className="text-sm leading-relaxed">Parentheses for complex logical grouping</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        {/* Date Filtering Card */}
+                        <div className={`professional-card p-6 transition-all duration-300 shadow-xl hover:shadow-2xl hover:-translate-y-1 ${
+                            darkMode
+                                ? 'glass-dark shadow-gray-900/25 hover:shadow-gray-900/40'
+                                : 'glass-card shadow-blue-100/60 hover:shadow-blue-200/70'
+                        }`} style={{
+                            boxShadow: darkMode
+                                ? '0 12px 28px -8px rgba(0, 0, 0, 0.3), 0 8px 24px -12px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+                                : '0 12px 28px -8px rgba(59, 130, 246, 0.18), 0 8px 24px -12px rgba(59, 130, 246, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.7)'
+                        }}>
+                            <div className="flex items-center mb-4">
+                                <div className={`p-3 rounded-xl shadow-lg transition-all duration-300 ${
+                                    darkMode ? 'bg-green-500/20 shadow-green-500/20' : 'bg-green-50 shadow-green-200/30'
+                                }`}>
+                                    <Calendar className={`w-5 h-5 ${darkMode ? 'text-green-400' : 'text-green-600'}`} />
+                                </div>
+                                <h3 className="text-base font-bold ml-3">Date & Year Filtering</h3>
                             </div>
-                            <div className="flex items-center space-x-2">
-                                <div className="w-3 h-3 rounded-full bg-blue-600"></div>
-                                <span>Exact phrase matching with quotation marks</span>
+                            <ul className="space-y-3">
+                                <li className="flex items-start">
+                                    <ChevronRight size={16} className="text-blue-600 mt-1 mr-3 flex-shrink-0 drop-shadow-sm" />
+                                    <span className="text-sm leading-relaxed">Year range filtering: [2020 TO 2025]</span>
+                                </li>
+                                <li className="flex items-start">
+                                    <ChevronRight size={16} className="text-blue-600 mt-1 mr-3 flex-shrink-0 drop-shadow-sm" />
+                                    <span className="text-sm leading-relaxed">Specific date ranges and publication periods</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        {/* Field-Specific Search Card */}
+                        <div className={`professional-card p-6 transition-all duration-300 shadow-xl hover:shadow-2xl hover:-translate-y-1 ${
+                            darkMode
+                                ? 'glass-dark shadow-gray-900/25 hover:shadow-gray-900/40'
+                                : 'glass-card shadow-blue-100/60 hover:shadow-blue-200/70'
+                        }`} style={{
+                            boxShadow: darkMode
+                                ? '0 12px 28px -8px rgba(0, 0, 0, 0.3), 0 8px 24px -12px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+                                : '0 12px 28px -8px rgba(59, 130, 246, 0.18), 0 8px 24px -12px rgba(59, 130, 246, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.7)'
+                        }}>
+                            <div className="flex items-center mb-4">
+                                <div className={`p-3 rounded-xl shadow-lg transition-all duration-300 ${
+                                    darkMode ? 'bg-purple-500/20 shadow-purple-500/20' : 'bg-purple-50 shadow-purple-200/30'
+                                }`}>
+                                    <User className={`w-5 h-5 ${darkMode ? 'text-purple-400' : 'text-purple-600'}`} />
+                                </div>
+                                <h3 className="text-base font-bold ml-3">Field-Specific Search</h3>
                             </div>
-                            <div className="flex items-center space-x-2">
-                                <div className="w-3 h-3 rounded-full bg-blue-600"></div>
-                                <span>Field-specific searches (author, title, abstract, etc.)</span>
-                            </div>
+                            <ul className="space-y-3">
+                                <li className="flex items-start">
+                                    <ChevronRight size={16} className="text-blue-600 mt-1 mr-3 flex-shrink-0 drop-shadow-sm" />
+                                    <span className="text-sm leading-relaxed">Author, title, abstract, and keyword targeting</span>
+                                </li>
+                                <li className="flex items-start">
+                                    <ChevronRight size={16} className="text-blue-600 mt-1 mr-3 flex-shrink-0 drop-shadow-sm" />
+                                    <span className="text-sm leading-relaxed">Exact phrase matching with quotation marks</span>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                    <div className="md:w-1/2 md:pl-12">
-                        <div className={`p-6 rounded-lg ${darkMode ? 'bg-gray-700' : 'bg-white'} shadow-lg`}>
-                            <div className="font-mono text-sm">
-                                <div className="mb-2"># Example Boolean Search</div>
-                                <div className="p-2 bg-gray-800 text-green-400 rounded mb-4">
-                                    ("immuno-oncology" OR "cancer immunotherapy") AND "PD-1 inhibitor" AND year:[2020 TO 2025]
+
+                    {/* Right side - Search Examples */}
+                    <div className="space-y-6">
+                        {/* Search Examples Card */}
+                        <div className={`professional-card p-8 transition-all duration-300 shadow-xl hover:shadow-2xl ${
+                            darkMode
+                                ? 'glass-dark shadow-gray-900/25'
+                                : 'glass-card shadow-blue-100/60'
+                        }`} style={{
+                            boxShadow: darkMode
+                                ? '0 12px 28px -8px rgba(0, 0, 0, 0.3), 0 8px 24px -12px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+                                : '0 12px 28px -8px rgba(59, 130, 246, 0.18), 0 8px 24px -12px rgba(59, 130, 246, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.7)'
+                        }}>
+                            <div className="flex items-center mb-6">
+                                <div className={`p-3 rounded-xl shadow-lg transition-all duration-300 ${
+                                    darkMode ? 'bg-indigo-500/20 shadow-indigo-500/20' : 'bg-indigo-50 shadow-indigo-200/30'
+                                }`}>
+                                    <Quote className={`w-6 h-6 ${darkMode ? 'text-indigo-400' : 'text-indigo-600'}`} />
                                 </div>
-                                <div className="mb-2"># Author + Subject Search</div>
-                                <div className="p-2 bg-gray-800 text-green-400 rounded">
-                                    author:"Smith J" AND subject:"diabetes" NOT "type 1"
+                                <h3 className="text-lg font-bold ml-4">Search Examples</h3>
+                            </div>
+
+                            <div className="space-y-6">
+                                {/* Boolean Search Example */}
+                                <div>
+                                    <div className={`text-xs font-medium mb-2 ${
+                                        darkMode ? 'text-gray-300' : 'text-gray-600'
+                                    }`}>
+                                        # Boolean Search
+                                    </div>
+                                    <div className={`p-4 rounded-lg font-mono text-sm shadow-inner ${
+                                        darkMode ? 'bg-gray-800 text-green-400' : 'bg-gray-900 text-green-400'
+                                    }`}>
+                                        ("immuno-oncology" OR "cancer immunotherapy")<br />
+                                        AND "PD-1 inhibitor" AND year:[2020 TO 2025]
+                                    </div>
+                                </div>
+
+                                {/* Field Search Example */}
+                                <div>
+                                    <div className={`text-xs font-medium mb-2 ${
+                                        darkMode ? 'text-gray-300' : 'text-gray-600'
+                                    }`}>
+                                        # Author + Subject Search
+                                    </div>
+                                    <div className={`p-4 rounded-lg font-mono text-sm shadow-inner ${
+                                        darkMode ? 'bg-gray-800 text-green-400' : 'bg-gray-900 text-green-400'
+                                    }`}>
+                                        author:"Smith J" AND subject:"diabetes"<br />
+                                        NOT "type 1"
+                                    </div>
+                                </div>
+
+                                {/* Complex Query Example */}
+                                <div>
+                                    <div className={`text-xs font-medium mb-2 ${
+                                        darkMode ? 'text-gray-300' : 'text-gray-600'
+                                    }`}>
+                                        # Complex Query
+                                    </div>
+                                    <div className={`p-4 rounded-lg font-mono text-sm shadow-inner ${
+                                        darkMode ? 'bg-gray-800 text-green-400' : 'bg-gray-900 text-green-400'
+                                    }`}>
+                                        title:"machine learning" AND<br />
+                                        (abstract:"neural network" OR abstract:"AI")<br />
+                                        AND year:[2023 TO 2025]
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Stats */}
+                            <div className="mt-6 pt-6 border-t border-gray-200/20">
+                                <div className="grid grid-cols-2 gap-4 text-center">
+                                    <div>
+                                        <div className="text-lg font-bold text-blue-600">2.3M+</div>
+                                        <div className="text-xs text-gray-500">Documents Indexed</div>
+                                    </div>
+                                    <div>
+                                        <div className="text-lg font-bold text-green-600">&lt;0.5s</div>
+                                        <div className="text-xs text-gray-500">Average Search Time</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

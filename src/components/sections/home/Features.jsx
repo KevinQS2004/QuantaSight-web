@@ -1,77 +1,107 @@
 import React from 'react';
 import { Database, Users, Award } from 'lucide-react';
-import {useTheme} from "../../../context/ThemeContext.jsx";
+import { useTheme } from "../../../context/ThemeContext.jsx";
 
-// Improved FeatureCard component with better light mode styling
+// Professional FeatureCard with enhanced glassmorphism and shadows
 const FeatureCard = ({ title, subtitle, description, icon }) => {
     const { darkMode } = useTheme();
 
     return (
-        <div className={`p-6 rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl transform hover:-translate-y-1 ${
+        <div className={`professional-card group hover:-translate-y-1 min-h-[280px] flex flex-col transition-all duration-300 p-8 ${
             darkMode
-                ? 'bg-gray-800 text-white'
-                : 'bg-white text-gray-800 border border-gray-100'
-        }`}>
-            <div className="mb-4">
-                {React.cloneElement(icon, {
-                    className: `${
-                        darkMode ? 'text-blue-500' : 'text-blue-600'
-                    } w-12 h-12`
-                })}
+                ? 'glass-dark text-white shadow-xl shadow-gray-900/20 hover:shadow-2xl hover:shadow-gray-900/30'
+                : 'glass-card text-gray-800 shadow-xl shadow-blue-100/50 hover:shadow-2xl hover:shadow-blue-200/60'
+        }`} style={{
+            boxShadow: darkMode
+                ? '0 10px 25px -5px rgba(0, 0, 0, 0.25), 0 10px 20px -10px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+                : '0 10px 25px -5px rgba(59, 130, 246, 0.15), 0 10px 20px -10px rgba(59, 130, 246, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.6)'
+        }}>
+            <div className="flex flex-col items-start text-left">
+                <div className={`mb-6 p-4 rounded-xl transition-all duration-300 group-hover:scale-110 shadow-lg ${
+                    darkMode ? 'bg-blue-500/20 shadow-blue-500/20' : 'bg-blue-50 shadow-blue-200/30'
+                }`}>
+                    {React.cloneElement(icon, {
+                        className: `w-8 h-8 ${darkMode ? 'text-blue-400' : 'text-blue-600'}`
+                    })}
+                </div>
+                <h3 className="text-lg font-semibold mb-3">{title}</h3>
+                <h4 className={`text-sm font-medium mb-4 ${
+                    darkMode ? 'text-blue-400' : 'text-blue-600'
+                }`}>
+                    {subtitle}
+                </h4>
+                <p className={`text-sm leading-relaxed ${
+                    darkMode ? 'text-gray-300' : 'text-gray-600'
+                }`}>
+                    {description}
+                </p>
             </div>
-            <h3 className="text-xl font-bold mb-1">{title}</h3>
-            <h4 className={`text-sm font-medium mb-3 ${
-                darkMode ? 'text-blue-400' : 'text-blue-600'
-            }`}>
-                {subtitle}
-            </h4>
-            <p className={`${
-                darkMode ? 'text-gray-300' : 'text-gray-600'
-            }`}>
-                {description}
-            </p>
         </div>
     );
 };
 
 const Features = ({ darkMode }) => {
     return (
-        <section className="py-16">
+        <section className={`py-20 ${darkMode ? 'bg-gray-900' : 'bg-gradient-to-b from-gray-50/50 to-white'}`}>
             <div className="container mx-auto px-4">
-                <div className="text-center mb-12">
-                    <h2 className={`text-3xl font-bold mb-4 ${
+                <div className="text-center mb-16">
+                    <div className={`inline-flex items-center px-3 py-1 glass-light rounded-full text-xs font-medium text-blue-700 mb-4 shadow-lg ${
+                        darkMode ? 'shadow-gray-800/30' : 'shadow-blue-100/50'
+                    }`}>
+                        <Database className="w-3 h-3 mr-2" />
+                        Core Features
+                    </div>
+                    <h2 className={`text-2xl font-bold mb-3 ${
                         darkMode ? 'text-white' : 'text-gray-800'
                     }`}>
-                        You're in good hands
+                        Built for Scientific Excellence
                     </h2>
-                    <p className={`text-lg max-w-2xl mx-auto ${
+                    <p className={`text-base max-w-2xl mx-auto ${
                         darkMode ? 'text-gray-400' : 'text-gray-600'
                     }`}>
-                        With powerful time-saving and collaborative features, QuantaSight helps you focus on the tasks and provides impactful insights within no time
+                        Powerful features designed to accelerate pharmaceutical research and enhance collaboration across scientific teams
                     </p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <FeatureCard
-                        title="Feature Rich"
-                        subtitle="Effortless Research Advancement"
-                        description="It introduces a paradigm where tasks that once consumed weeks now transpire in mere minutes. The catalyst behind this transformation is Hercules, our AI co-pilot."
+                        title="AI-Powered Research"
+                        subtitle="Accelerated Discovery"
+                        description="Transform complex research tasks from weeks to minutes using advanced AI algorithms specifically trained for pharmaceutical and life sciences applications."
                         icon={<Database />}
                     />
 
                     <FeatureCard
-                        title="Collaborate"
-                        subtitle="Enhance Collaboration with QuantaSight"
-                        description="Provides effortless collaboration among peers, enabling the seamless sharing of insights and findings. In doing so, it not only sparks innovation but also accelerates the pace of scientific progress."
+                        title="Seamless Collaboration"
+                        subtitle="Enhanced Teamwork"
+                        description="Enable effortless collaboration across departments with secure sharing, real-time editing, and comprehensive version control for all research materials."
                         icon={<Users />}
                     />
 
                     <FeatureCard
-                        title="Save Time"
-                        subtitle="Faster Process"
-                        description="Supercharging your work tasks from days and weeks to minutes and seconds. Our AI-powered platform automates repetitive tasks and streamlines complex workflows."
+                        title="Regulatory Compliance"
+                        subtitle="FDA-Ready Documentation"
+                        description="Ensure all research outputs meet regulatory standards with built-in compliance checks, audit trails, and professionally formatted documentation."
                         icon={<Award />}
                     />
+                </div>
+
+                {/* Trust indicators */}
+                <div className="mt-16 pt-8 border-t border-gray-200/50">
+                    <div className="flex justify-center items-center gap-8 text-xs text-gray-500">
+                        <div className="flex items-center">
+                            <div className="w-2 h-2 bg-green-500 rounded-full mr-2 shadow-lg shadow-green-500/50"></div>
+                            ISO 27001 Certified
+                        </div>
+                        <div className="flex items-center">
+                            <div className="w-2 h-2 bg-green-500 rounded-full mr-2 shadow-lg shadow-green-500/50"></div>
+                            HIPAA Compliant
+                        </div>
+                        <div className="flex items-center">
+                            <div className="w-2 h-2 bg-green-500 rounded-full mr-2 shadow-lg shadow-green-500/50"></div>
+                            SOC 2 Type II
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

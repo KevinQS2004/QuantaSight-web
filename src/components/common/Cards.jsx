@@ -2,42 +2,6 @@ import React from 'react';
 import { ChevronRight } from 'lucide-react';
 import SocialButton from './SocialButton';
 
-export const FeatureCard = ({ title, subtitle, description, icon }) => {
-    return (
-        <div className="p-6 rounded-xl bg-white dark:bg-gray-800 shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100 dark:border-gray-700">
-            <div className="flex flex-col items-center text-center">
-                <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-full">
-                    {icon}
-                </div>
-                <h3 className="text-xl font-bold mb-2">{title}</h3>
-                <h4 className="text-md font-medium mb-3 text-blue-600 dark:text-blue-400">{subtitle}</h4>
-                <p className="text-gray-600 dark:text-gray-400">{description}</p>
-            </div>
-        </div>
-    );
-};
-
-export const ModuleCard = ({ title, description, icon, onClick }) => {
-    return (
-        <div
-            onClick={onClick}
-            className="p-6 rounded-xl bg-white dark:bg-gray-800 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 cursor-pointer border border-gray-100 dark:border-gray-700 group"
-        >
-            <div className="flex flex-col items-center text-center">
-                <div className="mb-4 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-full group-hover:bg-blue-500 transition-colors duration-300">
-                    <div className="text-blue-600 group-hover:text-white transition-colors duration-300">
-                        {icon}
-                    </div>
-                </div>
-                <h3 className="text-xl font-bold mb-3">{title}</h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-4">{description}</p>
-                <button className="text-blue-600 dark:text-blue-400 font-medium flex items-center group-hover:translate-x-1 transition-transform duration-300">
-                    Learn More <ChevronRight size={16} className="ml-1" />
-                </button>
-            </div>
-        </div>
-    );
-};
 
 export const TeamMember = ({ name, title, image, linkdin, twitter }) => {
     return (

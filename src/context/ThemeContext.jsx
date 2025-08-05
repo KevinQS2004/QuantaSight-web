@@ -3,13 +3,8 @@ import React, { createContext, useState, useEffect, useContext } from 'react';
 const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
+    // Default to light mode instead of system preference
     const [darkMode, setDarkMode] = useState(false);
-
-    useEffect(() => {
-        // Check user preference for dark mode
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        setDarkMode(prefersDark);
-    }, []);
 
     // Effect to apply dark mode class when darkMode state changes
     useEffect(() => {

@@ -58,12 +58,10 @@ const Header = ({ activeSection }) => {
     const { darkMode, toggleDarkMode } = useTheme();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState({
-        features: false,
         modules: false
     });
 
-    // Create refs for each dropdown
-    const featuresRef = useRef(null);
+    // Create ref for modules dropdown
     const modulesRef = useRef(null);
 
     const toggleMobileMenu = () => {
@@ -71,15 +69,14 @@ const Header = ({ activeSection }) => {
     };
 
     const toggleDropdown = (menu) => {
-        // Close other dropdowns when opening a new one
+        // Only handle modules dropdown now
         setDropdownOpen({
-            features: menu === 'features' ? !dropdownOpen.features : false,
             modules: menu === 'modules' ? !dropdownOpen.modules : false
         });
     };
 
     const closeDropdowns = () => {
-        setDropdownOpen({ features: false, modules: false });
+        setDropdownOpen({ modules: false });
     };
 
     const closeMobileMenu = () => {
@@ -90,11 +87,6 @@ const Header = ({ activeSection }) => {
     // Handle clicks outside the dropdown
     useEffect(() => {
         const handleClickOutside = (event) => {
-            // Close features dropdown if click outside
-            if (featuresRef.current && !featuresRef.current.contains(event.target)) {
-                setDropdownOpen(prev => ({...prev, features: false}));
-            }
-
             // Close modules dropdown if click outside
             if (modulesRef.current && !modulesRef.current.contains(event.target)) {
                 setDropdownOpen(prev => ({...prev, modules: false}));
@@ -112,8 +104,8 @@ const Header = ({ activeSection }) => {
 
     return (
         <header className={`sticky top-0 z-50 ${darkMode ? 'bg-gray-800' : 'bg-white'} shadow-md`}>
-            <div className="container mx-auto px-4">
-                <div className="flex justify-between items-center py-4">
+            <div className="container mx-auto px-2">
+                <div className="flex justify-between items-center py-3">
                     {/* Logo */}
                     <Link to="/" className="flex items-center space-x-2">
                         <span className="h-10 w-10 flex items-center">
@@ -136,54 +128,6 @@ const Header = ({ activeSection }) => {
                             icon={<Info size={16} />}
                             to="/about"
                         />
-
-                        {/* Features Dropdown */}
-                        <div className="relative" ref={featuresRef}>
-                            <button
-                                className={`flex items-center space-x-1 px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors ${activeSection === 'features' ? 'text-blue-600' : ''}`}
-                                onClick={() => toggleDropdown('features')}
-                            >
-                                <span>Features</span>
-                                <ChevronDown size={16} className={`transition-transform ${dropdownOpen.features ? 'rotate-180' : ''}`} />
-                            </button>
-
-                            {dropdownOpen.features && (
-                                <div className={`absolute left-0 mt-2 w-60 ${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-md shadow-lg z-10 border ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
-                                    <div className="py-2">
-                                        <DropdownItem
-                                            title="Xtract"
-                                            description="AI-powered research & analysis"
-                                            to="/xtract"
-                                            onClick={closeDropdowns}
-                                        />
-                                        <DropdownItem
-                                            title="Medical Affairs Intelligence"
-                                            description="Unifying data from multiple sources"
-                                            to="/xtract"
-                                            onClick={closeDropdowns}
-                                        />
-                                        <DropdownItem
-                                            title="Pharmacovigilance Atlas"
-                                            description="AI-driven signal monitoring"
-                                            to="/atlas"
-                                            onClick={closeDropdowns}
-                                        />
-                                        <DropdownItem
-                                            title="QS Workroom"
-                                            description="Collaboration & content generation"
-                                            to="/workroom"
-                                            onClick={closeDropdowns}
-                                        />
-                                        <DropdownItem
-                                            title="AI CRM Dashboard"
-                                            description="Manage clients, clinical trials and deployments using AI"
-                                            to="/demo"
-                                            onClick={closeDropdowns}
-                                        />
-                                    </div>
-                                </div>
-                            )}
-                        </div>
 
                         {/* Modules Dropdown */}
                         <div className="relative" ref={modulesRef}>
@@ -276,47 +220,6 @@ const Header = ({ activeSection }) => {
                             to="/about"
                             onClick={closeMobileMenu}
                         />
-
-                        {/* Mobile Features Dropdown */}
-                        <div>
-                            <button
-                                className="w-full flex items-center justify-between px-4 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700"
-                                onClick={() => toggleDropdown('features')}
-                            >
-                                <span className="font-medium">Features</span>
-                                <ChevronDown size={18} className={dropdownOpen.features ? 'rotate-180 transform' : ''} />
-                            </button>
-
-                            {dropdownOpen.features && (
-                                <div className="pl-6 mt-2 space-y-2">
-                                    <MobileNavLink
-                                        title="Xtract"
-                                        to="/xtract"
-                                        onClick={closeMobileMenu}
-                                    />
-                                    <MobileNavLink
-                                        title="Medical Affairs Intelligence"
-                                        to="/xtract"
-                                        onClick={closeMobileMenu}
-                                    />
-                                    <MobileNavLink
-                                        title="Pharmacovigilance Atlas"
-                                        to="/atlas"
-                                        onClick={closeMobileMenu}
-                                    />
-                                    <MobileNavLink
-                                        title="QS Workroom"
-                                        to="/workroom"
-                                        onClick={closeMobileMenu}
-                                    />
-                                    <MobileNavLink
-                                        title="AI CRM Dashboard"
-                                        to="/demo"
-                                        onClick={closeMobileMenu}
-                                    />
-                                </div>
-                            )}
-                        </div>
 
                         {/* Mobile Modules Dropdown */}
                         <div>

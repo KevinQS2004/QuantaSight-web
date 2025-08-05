@@ -48,9 +48,9 @@ const Footer = () => {
     return (
         <footer className={`mt-12 py-8 ${
             darkMode
-                ? 'bg-gray-900 border-gray-700'
-                : 'bg-gray-50 border-gray-200'
-        } border-t`}>
+                ? 'glass-dark border-gray-700/50'
+                : 'glass-light border-gray-200/50'
+        } border-t backdrop-blur-xl`}>
             <div className="container mx-auto px-4">
                 <div className="flex flex-col md:flex-row justify-between items-center">
                     <div className="mb-6 md:mb-0">
