@@ -35,7 +35,7 @@ const NavLink = ({ title, icon, to, isButton }) => {
                 flex items-center space-x-2 px-3 py-2 rounded-lg transition-all duration-300 text-sm font-medium
                 ${isActive
                 ? 'text-blue-600 bg-blue-50 shadow-sm'
-                : 'text-black-800 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50/50 dark:hover:bg-blue-500/10 hover:shadow-sm'
+                : 'text-black dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50/50 dark:hover:bg-blue-500/10 hover:shadow-sm'
             }
             `}
         >
@@ -64,7 +64,7 @@ const MobileNavLink = ({ title, icon, to, isButton, onClick }) => {
         <Link
             to={to}
             onClick={onClick}
-            className="flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-300 text-sm font-medium text-gray-800 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50/50 dark:hover:bg-blue-500/10 hover:shadow-sm"
+            className="flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-300 text-sm font-medium text-black dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50/50 dark:hover:bg-blue-500/10 hover:shadow-sm"
         >
             {icon && icon}
             <span>{title}</span>
@@ -170,7 +170,7 @@ const Header = ({ activeSection }) => {
                                 className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-all duration-300 text-sm font-medium ${
                                     activeSection === 'modules'
                                         ? 'text-blue-600 bg-blue-50 shadow-sm'
-                                        : 'text-gray-800 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50/50 dark:hover:bg-blue-500/10 hover:shadow-sm'
+                                        : 'text-black dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50/50 dark:hover:bg-blue-500/10 hover:shadow-sm'
                                 }`}
                                 onClick={() => toggleDropdown('modules')}
                             >
@@ -288,7 +288,7 @@ const Header = ({ activeSection }) => {
                                     : ''
                             }`}>
                                 <button
-                                    className="w-full flex items-center justify-between px-4 py-3 rounded-lg transition-all duration-300 text-sm font-medium text-gray-800 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50/50 dark:hover:bg-blue-500/10"
+                                    className="w-full flex items-center justify-between px-4 py-3 rounded-lg transition-all duration-300 text-sm font-medium text-black dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50/50 dark:hover:bg-blue-500/10"
                                     onClick={() => toggleDropdown('modules')}
                                 >
                                     <span>Modules</span>
