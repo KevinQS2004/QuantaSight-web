@@ -86,16 +86,11 @@ const Footer = ({ setActiveSection }) => {
 
                         <FooterLinkGroup title="Resources">
                             <FooterLink title="Blog" onClick={() => setActiveSection('blogs')}/>
-                            <FooterLink title="Documentation" onClick={() => {}}/>
-                            <FooterLink title="Tutorials" onClick={() => {}}/>
                             <FooterLink title="Case Studies" onClick={() => {}}/>
                         </FooterLinkGroup>
 
                         <FooterLinkGroup title="Legal">
                             <FooterLink title="Privacy Policy" onClick={() => {}}/>
-                            <FooterLink title="Terms of Service" onClick={() => {}}/>
-                            <FooterLink title="Cookie Policy" onClick={() => {}}/>
-                            <FooterLink title="GDPR" onClick={() => {}}/>
                         </FooterLinkGroup>
                     </div>
                 </div>

@@ -48,7 +48,7 @@ export const TeamMember = ({ name, title, image, linkdin, twitter }) => {
                     alt={name}
                     className="w-full h-full object-cover transition duration-300 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-blue-600 opacity-0 group-hover:opacity-20 transition-opacity duration-300 rounded-full"></div>
+                <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300 rounded-full"></div>
             </div>
             <div className="font-bold text-lg">{name}</div>
             <div className="text-sm text-gray-600 dark:text-gray-400">{title}</div>
@@ -59,6 +59,7 @@ export const TeamMember = ({ name, title, image, linkdin, twitter }) => {
         </div>
     );
 };
+
 export const BlogCard = ({ id, title, excerpt, image, author, role, date, onReadMore }) => {
     return (
         <div className="rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700">

@@ -9,7 +9,8 @@ const DocumentGeneration = ({ darkMode }) => {
                     <div className="md:w-1/2 mb-8 md:mb-0">
                         <h2 className="text-3xl font-bold mb-4">Multi-Format Content Creation</h2>
                         <p className="text-lg mb-6">
-                            Transform research findings into polished, audience-specific documents with just a few clicks. Our AI-powered templates help you create consistent, high-quality content in various formats.
+                            Transform research findings into polished, audience-specific documents with just a few clicks. Our AI you can defend in a meeting templates help you create consistent, high-quality content in various formats.
+
                         </p>
                         <div className="space-y-4">
                             <div className="flex items-start">

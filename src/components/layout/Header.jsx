@@ -99,7 +99,7 @@ const Header = ({ activeSection, setActiveSection }) => {
                                 <div className={`absolute left-0 mt-2 w-60 ${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-md shadow-lg z-10 border ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
                                     <div className="py-2">
                                         <DropdownItem
-                                            title="XtractXtract"
+                                            title="Xtract"
                                             description="AI-powered research & analysis"
                                             onClick={() => {
                                                 setActiveSection('xtract');
@@ -128,8 +128,8 @@ const Header = ({ activeSection, setActiveSection }) => {
                                             }}
                                         />
                                         <DropdownItem
-                                            title="AI CRM TL Dashboard"
-                                            description="Manage clients with AI assistance"
+                                            title="AI CRM Dashboard"
+                                            description="Manage clients, clinical trials and deployments using AI"
                                             onClick={() => {
                                                 setDropdownOpen({...dropdownOpen, features: false});
                                             }}
