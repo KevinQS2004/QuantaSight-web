@@ -1,6 +1,5 @@
 @import "tailwindcss";
-@tailwind base;
-@tailwind components;
+
 @tailwind utilities;
 
 /* Base styles with smaller fonts */
@@ -140,7 +139,7 @@ body {
 
 /* Enhanced glassmorphism for cards */
 .professional-card {
-    @apply glass-card rounded-xl p-5 transition-all duration-300 hover:shadow-lg;
+    @apply  rounded-xl p-5 transition-all duration-300 hover:shadow-lg;
     position: relative;
     overflow: hidden;
 }

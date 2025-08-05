@@ -25,7 +25,7 @@ const MissionVision = ({ darkMode }) => {
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-1">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
                     {/* Mission Card */}
                     <div className={`professional-card p-8 h-full flex flex-col transition-all duration-300 shadow-xl hover:shadow-2xl hover:-translate-y-1 ${
                         darkMode
