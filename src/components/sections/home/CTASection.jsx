@@ -5,7 +5,7 @@ import { Calendar, ArrowRight, Shield, Clock } from 'lucide-react';
 const CTASection = ({ darkMode }) => {
     return (
         <section className="py-16">
-            <div className="container mx-auto px-4">
+            <div className="max-w-7l mx-auto px-40">
                 <div className={`professional-card overflow-hidden relative transition-all duration-300 ${
                     darkMode
                         ? 'glass-dark shadow-xl shadow-gray-900/25'

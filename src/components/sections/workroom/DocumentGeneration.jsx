@@ -4,7 +4,7 @@ import { ChevronRight, FileText, Award, Users, TrendingUp, CheckCircle } from 'l
 const DocumentGeneration = ({ darkMode }) => {
     return (
         <section className={`py-20 ${darkMode ? 'bg-gray-800' : 'bg-gradient-to-b from-white to-blue-50/30'}`}>
-            <div className="container mx-auto px-4">
+            <div className="max-w-7l mx-auto px-40">
                 <div className={`professional-card p-8 md:p-10 transition-all duration-300 shadow-xl hover:shadow-2xl ${
                     darkMode
                         ? 'glass-dark shadow-gray-900/25 hover:shadow-gray-900/40'

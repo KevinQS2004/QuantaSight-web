@@ -75,7 +75,7 @@ const ModuleCard = ({ title, description, icon, to, badge }) => {
 const ModulesOverview = ({ darkMode }) => {
     return (
         <section className={`py-16 ${darkMode ? 'bg-gray-800' : 'bg-gradient-to-b from-white to-blue-50/30'}`}>
-            <div className="container mx-auto px-4">
+            <div className="max-w-7l mx-auto px-40">
                 <div className="text-center mb-12">
                     <div className={`inline-flex items-center px-3 py-1 glass-light rounded-full text-xs font-medium text-blue-700 mb-4 shadow-lg ${
                         darkMode ? 'shadow-gray-800/30' : 'shadow-blue-100/50'

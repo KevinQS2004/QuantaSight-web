@@ -5,8 +5,8 @@
 /* Base styles with smaller fonts */
 html {
     scroll-behavior: smooth;
-    font-size: 14px; /* Reduced from default 16px */
-    scroll-padding-top: 80px; /* Account for fixed header */
+    font-size: 14px;
+    scroll-padding-top: 80px;
 }
 
 body {

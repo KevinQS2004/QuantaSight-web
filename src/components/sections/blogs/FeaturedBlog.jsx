@@ -16,7 +16,7 @@ const FeaturedBlog = ({ darkMode, onReadMore }) => {
 
     return (
         <section className={`py-20 ${darkMode ? 'bg-gray-900' : 'bg-gradient-to-b from-white to-gray-50/50'}`}>
-            <div className="container mx-auto px-4">
+            <div className="max-w-7l mx-auto px-40">
                 {/* Section Header */}
                 <div className="text-center mb-16">
                     <div className={`inline-flex items-center px-3 py-1 glass-light rounded-full text-xs font-medium text-blue-700 mb-4 shadow-lg ${

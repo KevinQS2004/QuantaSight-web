@@ -43,7 +43,7 @@ const AtlasHero = ({ darkMode }) => {
                 }} />
             </div>
 
-            <div className="container mx-auto px-4 relative">
+            <div className="max-w-7l mx-auto px-40">
                 <div className="flex flex-col lg:flex-row items-center gap-12 md:gap-16">
                     <div className="lg:w-1/2 mb-12 md:mb-0">
 
