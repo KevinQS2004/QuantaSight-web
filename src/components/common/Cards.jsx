@@ -24,14 +24,18 @@ export const TeamMember = ({ name, title, image, linkdin, twitter }) => {
     );
 };
 
-export const BlogCard = ({ id, title, excerpt, image, author, role, date, onReadMore }) => {
+export const BlogCard = ({ id, title, excerpt, image, author, role, date, onReadMore, darkMode }) => {
     return (
-        <div className="rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700">
+        <div className={`rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border ${
+            darkMode
+                ? 'bg-gray-800 border-gray-700'
+                : 'bg-white border-gray-200/50'
+        }`}>
             <div className="relative">
                 <img
                     src={image || "https://via.placeholder.com/400x250"}
                     alt={title}
-                    className="w-full h-48 object-cover"
+                    className="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"
                     loading="lazy"
                 />
                 <div className="absolute top-4 right-4 bg-blue-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-sm">
@@ -40,11 +44,15 @@ export const BlogCard = ({ id, title, excerpt, image, author, role, date, onRead
             </div>
 
             <div className="p-6">
-                <h3 className="text-xl font-bold mb-3 line-clamp-2 text-gray-800 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200">
+                <h3 className={`text-xl font-bold mb-3 line-clamp-2 transition-colors duration-200 ${
+                    darkMode ? 'text-white hover:text-blue-400' : 'text-gray-800 hover:text-blue-600'
+                }`}>
                     {title}
                 </h3>
 
-                <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3 text-sm">
+                <p className={`mb-4 line-clamp-3 text-sm ${
+                    darkMode ? 'text-gray-300' : 'text-gray-600'
+                }`}>
                     {excerpt}
                 </p>
 
@@ -54,10 +62,14 @@ export const BlogCard = ({ id, title, excerpt, image, author, role, date, onRead
                             {author.charAt(0)}
                         </div>
                         <div>
-                            <div className="font-medium text-gray-800 dark:text-white text-sm">
+                            <div className={`font-medium text-sm ${
+                                darkMode ? 'text-white' : 'text-gray-800'
+                            }`}>
                                 {author}
                             </div>
-                            <div className="text-xs text-gray-600 dark:text-gray-400">
+                            <div className={`text-xs ${
+                                darkMode ? 'text-gray-400' : 'text-gray-600'
+                            }`}>
                                 {role}
                             </div>
                         </div>
@@ -65,7 +77,11 @@ export const BlogCard = ({ id, title, excerpt, image, author, role, date, onRead
 
                     <button
                         onClick={() => onReadMore(id)}
-                        className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium transition-colors text-sm flex items-center"
+                        className={`font-medium transition-colors text-sm flex items-center ${
+                            darkMode
+                                ? 'text-blue-400 hover:text-blue-300'
+                                : 'text-blue-600 hover:text-blue-800'
+                        }`}
                         aria-label={`Read more about ${title}`}
                     >
                         Read More
